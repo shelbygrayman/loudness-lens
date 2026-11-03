@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check a master's loudness, true peak and loudness range in your browser, and see what Spotify, Apple Music and YouTube will do to it. Audio never leaves the tab. Open source by Shelby.">
+  <meta name="theme-color" content="#101514">
+  <title>Loudness Lens · Check your master</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23c5f277'/%3E%3Ccircle cx='29' cy='28' r='14' fill='none' stroke='%23101514' stroke-width='5'/%3E%3Cpath d='m40 40 12 12' stroke='%23101514' stroke-width='5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#drop">Skip to meter</a>
+  <div class="shell">
+    <header>
+      <a class="brand" href="./"><span class="mark" aria-hidden="true">◉</span> loudness<span>lens</span></a>
+      <nav aria-label="Main"><a href="#limits">Limits</a><a href="https://github.com/shelbygrayman/loudness-lens/blob/main/BENCHMARKS.md">Accuracy</a><a href="https://github.com/shelbygrayman/loudness-lens">Source ↗</a><span class="local"><i></i> Runs locally</span></nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">A SMALL TOOL FOR MUSICIANS</p>
+          <h1>Check your master.<br><span>Before the platforms do.</span></h1>
+          <p class="intro">Drop a track. Loudness Lens measures integrated loudness, true peak and loudness range to ITU-R BS.1770 and EBU R128, then shows what Spotify, Apple Music, YouTube and others will do to it.</p>
+        </div>
+        <aside class="hero-note"><span class="note-icon" aria-hidden="true">↳</span><p>Your audio stays in this tab.</p><span>Nothing uploaded. No account.<br>WAV is read sample for sample.</span></aside>
+      </section>
+
+      <section class="panel" aria-label="Meter">
+        <div class="section-title"><h2><span>01</span> The track</h2><span class="tag">WAV · FLAC · MP3 · AAC · OGG</span></div>
+        <label id="drop" class="drop" for="file" tabindex="0">
+          <input id="file" type="file" accept="audio/*,.wav,.flac,.mp3,.m4a,.aac,.ogg,.opus" hidden>
+          <span class="drop-icon" aria-hidden="true">♪</span>
+          <strong>Drop an audio file here</strong>
+          <span class="hint">or click to choose one. WAV gives exact results; other formats go through your browser's decoder.</span>
+        </label>
+        <div id="progress" hidden><div class="bar"><i id="bar"></i></div><p id="status" class="hint" aria-live="polite"></p></div>
+        <p id="error" role="alert" class="error" hidden></p>
+      </section>
+
+      <section id="results" class="panel" hidden aria-live="polite">
+        <div class="section-title"><h2><span>02</span> The reading</h2><span class="tag" id="file-tag"></span></div>
+        <div class="tiles" id="tiles"></div>
+        <p class="hint" id="meta"></p>
+        <ul class="advice" id="advice"></ul>
+        <figure class="curve">
+          <canvas id="curve" height="180" role="img" aria-label="Short-term loudness over time"></canvas>
+          <figcaption class="hint">Short-term loudness (3 s window) over time. Dashed line: −14 LUFS.</figcaption>
+        </figure>
+        <h3>What each platform will do</h3>
+        <div class="table-wrap"><table id="targets"><thead><tr><th>Platform</th><th>Setting</th><th>Target</th><th>Your track</th><th>Source</th></tr></thead><tbody></tbody></table></div>
+        <p class="hint">Official: from the platform's own documentation. Reported: widely cited by mastering references, not published as a spec by the platform. Normalisation can be turned off by listeners and some platforms normalise per album.</p>
+        <div class="actions"><button type="button" class="ghost" id="download">Download reading (JSON)</button><button type="button" class="ghost" id="again">Check another track</button></div>
+      </section>
+
+      <section id="limits" class="panel">
+        <div class="section-title"><h2><span>03</span> How it measures, and its limits</h2></div>
+        <ul class="limits">
+          <li>Integrated loudness: K-weighting and gating per ITU-R BS.1770-4. Passes the EBU Tech 3341 test cases and matches ffmpeg's ebur128 to 0.1 LU on every case in <a href="https://github.com/shelbygrayman/loudness-lens/blob/main/BENCHMARKS.md">the benchmark</a>.</li>
+          <li>Loudness range per EBU Tech 3342. Momentary and short-term maxima per EBU R128.</li>
+          <li>True peak is an estimate: 8x oversampling with a 256-tap interpolator. On the benchmark it reads within 0.1 dB of a much finer reference, except on heavily clipped audio where it can read up to about 0.4 dB high.</li>
+          <li>Non-WAV files are decoded by your browser and resampled to 48 kHz, which can shift true peak slightly. Lossy files already carry encoder changes.</li>
+          <li>Platform behaviour changes and listeners can switch normalisation off. Treat the table as a guide, not a guarantee.</li>
+          <li>Mono files are measured as one channel, as BS.1770 specifies. Some tools treat mono as dual mono, which reads about 3 LU louder.</li>
+        </ul>
+      </section>
+    </main>
+    <footer><span>Open source, MIT. Built by <a href="https://github.com/shelbygrayman">Shelby</a>, a musician who wanted to check his own masters.</span><span>Part of the Lens tools.</span></footer>
+  </div>
+</body>
+</html>

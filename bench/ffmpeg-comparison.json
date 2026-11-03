@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-03",
+  "node": "v22.23.4",
+  "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "sampleRate": 48000,
+  "reference": "64x windowed-sinc interpolation, ±128 taps, Kaiser beta 12, loudest 20,000 intervals per channel; reference20k band-limits it to 20 kHz",
+  "rows": [
+    {
+      "case": "sine 1 kHz −23 dBFS (EBU 3341 #1)",
+      "integrated": {
+        "ours": -23,
+        "ffmpeg": -23,
+        "diff": 0
+      },
+      "lra": {
+        "ours": 0,
+        "ffmpeg": 0,
+        "diff": 0
+      },
+      "truePeak": {
+        "ours": -23,
+        "ffmpeg": -23,
+        "reference": -23,
+        "reference20k": -23,
+        "oursError": 0,
+        "ffmpegError": 0
+      },
+      "seconds": 20,
+      "measureMs": 507
+    },
+    {
+      "case": "stepped −26/−20/−26 (EBU 3341 #5)",
+      "integrated": {
+        "ours": -23,
+        "ffmpeg": -23,
+        "diff": 0
+      },
+      "lra": {
+        "ours": 6,
+        "ffmpeg": 6,
+        "diff": 0
+      },
+      "truePeak": {
+        "ours": -20,
+        "ffmpeg": -20,
+        "reference": -20,
+        "reference20k": -20,
+        "oursError": 0,
+        "ffmpegError": 0
+      },
+      "seconds": 60.1,
+      "measureMs": 1261
+    },
+    {
+      "case": "low-passed noise",
+      "integrated": {
+        "ours": -21.6,
+        "ffmpeg": -21.6,
+        "diff": 0
+      },
+      "lra": {
+        "ours": 0,
+        "ffmpeg": 0,
+        "diff": 0
+      },
+      "truePeak": {
+        "ours": -12.4,
+        "ffmpeg": -12.4,
+        "reference": -12.4,
+        "reference20k": -12.5,
+        "oursError": 0,
+        "ffmpegError": 0
+      },
+      "seconds": 30,
+      "measureMs": 565
+    },
+    {
+      "case": "intersample peak, fs/4 at 45°",
+      "integrated": {
+        "ours": 3.3,
+        "ffmpeg": 3.3,
+        "diff": 0
+      },
+      "lra": {
+        "ours": 0,
+        "ffmpeg": 0,
+        "diff": 0
+      },
+      "truePeak": {
+        "ours": -0.1,
+        "ffmpeg": 0.5,
+        "reference": -0.1,
+        "reference20k": -0.1,
+        "oursError": 0,
+        "ffmpegError": 0.6
+      },
+      "seconds": 5,
+      "measureMs": 120
+    },
+    {
+      "case": "synthetic song, gentle master",
+      "integrated": {
+        "ours": -10.3,
+        "ffmpeg": -10.3,
+        "diff": 0
+      },
+      "lra": {
+        "ours": 10,
+        "ffmpeg": 10,
+        "diff": 0
+      },
+      "truePeak": {
+        "ours": 1.6,
+        "ffmpeg": 1.4,
+        "reference": 1.7,
+        "reference20k": 1.5,
+        "oursError": -0.1,
+        "ffmpegError": -0.3
+      },
+      "seconds": 60,
+      "measureMs": 1081
+    },
+    {
+      "case": "synthetic song, loud master",
+      "integrated": {
+        "ours": -2.7,
+        "ffmpeg": -2.7,
+        "diff": 0
+      },
+      "lra": {
+        "ours": 6.5,
+        "ffmpeg": 6.5,
+        "diff": 0
+      },
+      "truePeak": {
+        "ours": 6.6,
+        "ffmpeg": 6.5,
+        "reference": 6.2,
+        "reference20k": 5.6,
+        "oursError": 0.4,
+        "ffmpegError": 0.3
+      },
+      "seconds": 60,
+      "measureMs": 1064
+    }
+  ]
+}

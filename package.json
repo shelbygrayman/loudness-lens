@@ -1,0 +1,15 @@
+{
+  "name": "loudness-lens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Private in-browser loudness, true peak and loudness range meter with streaming platform targets.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test loudness.test.js",
+    "compare": "node bench/compare-ffmpeg.js"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
